@@ -3,7 +3,7 @@ import scipy.integrate as integrate
 #import matplotlib.pyplot as plt
 import time
 import smbus
-
+roll_angle = 0
 alpha = 0.98
 t_prev = time.time()
 gyro_x_prev = 0
@@ -51,6 +51,7 @@ while (1):
         data[1] = gyro_y_current
         area = integrate.trapz(dt,data)
         gyro_yaw = gyro_yaw +area
+        roll_angle = ((gyro_roll+roll_angle)*alpha)+(acc_roll*(1-alpha))
 
     except:
         continue
@@ -58,4 +59,4 @@ while (1):
     gyro_x_prev = gyro_x_current
     gyro_y_prev = gyro_y_current
     gyro_z_prev = gyro_z_current
-    print("roll:",gyro_roll.round(4),"pitch:",gyro_pitch.round(4),"yaw:",gyro_yaw.round(4))
+    print("roll:",gyro_roll.round(3),"pitch:",gyro_pitch.round(3),"yaw:",gyro_yaw.round(3),"roll angle:",roll_angle)
