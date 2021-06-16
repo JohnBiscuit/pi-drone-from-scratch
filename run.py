@@ -11,12 +11,14 @@ gyro_y_prev = 0
 while (1):
     t_now = time.time()
     elapsed = t_now-t_prev
+    print("initial")
     try:
         acc_roll = acc_roll() #calculate instantaneous g-forces from accelerometer to get roll
         acc_pitch = acc_pitch()
         gyro_x = gyro_x(elapsed) #pitch
         gyro_y = gyro_y(elapsed) #yaw
         gyro_z = gyro_z(elapsed) #roll
+        print("try")
     except:
         continue
     try:
