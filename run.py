@@ -20,6 +20,7 @@ while (1):
         gyro_z = gyro_z(elapsed) #roll
         print("try")
     except:
+        print("error")
         continue
     try:
         gyro_pitch = gyro_pitch(gyro_x_prev,gyro_x,t_prev)
