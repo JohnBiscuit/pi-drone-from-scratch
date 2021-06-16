@@ -34,12 +34,7 @@ while (1):
         gyro_roll = gyro_roll(gyro_y_prev,gyro_x_current,prev_time)
     except:
         continue
-
     prev_time = t_now
-    gyro_x_prev = gyro_x_current
-    gyro_z_prev = gyro_y_current
-    gyro_y_prev = gyro_z_current
+    
 
     print(gyro_z_current)
-
-    print(acc_roll)
