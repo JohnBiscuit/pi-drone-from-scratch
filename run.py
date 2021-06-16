@@ -58,4 +58,4 @@ while (1):
     gyro_x_prev = gyro_x_current
     gyro_y_prev = gyro_y_current
     gyro_z_prev = gyro_z_current
-    print("roll:",gyro_roll,"pitch:",gyro_pitch,"yaw:",gyro_yaw)
+    print("roll:",gyro_roll.round(4),"pitch:",gyro_pitch.round(4),"yaw:",gyro_yaw.round(4))
