@@ -58,4 +58,4 @@ while (1):
     gyro_x_prev = gyro_x_current
     gyro_y_prev = gyro_y_current
     gyro_z_prev = gyro_z_current
-    print(pitch)
+    print(gyro_pitch)
