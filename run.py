@@ -16,8 +16,8 @@ time.sleep(1)
 dt = [0,0]
 data = [0,0]
 while (1):
-    t_now = time.time()
-    elapsed = t_now-t_prev
+    elapsed = time.time()-t_prev
+    t = elapsed
     #complementary filter (the whole try section,why? just because)
     try:
         ax,ay,az,wx,wy,wz= mpu6050_conv()
@@ -57,7 +57,7 @@ while (1):
 
     except:
         continue
-    print(time.time()-t_prev)
+    print(t)
     t_prev = t_now
     gyro_x_prev = gyro_x_current
     gyro_y_prev = gyro_y_current
