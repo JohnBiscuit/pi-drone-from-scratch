@@ -4,7 +4,7 @@ import scipy.integrate as integrate
 import time
 import smbus
 roll_angle = 0
-alpha = 0.8
+alpha = 0.2
 t_prev = time.time()
 gyro_x_prev = 0
 gyro_z_prev = 0
