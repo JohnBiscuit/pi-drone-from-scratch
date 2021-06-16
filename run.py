@@ -11,7 +11,7 @@ gyro_z_prev = 0
 gyro_y_prev = 0
 
 time.sleep(1)
-prev_time = time.time()
+
 while (1):
     t_now = time.time()
     elapsed = t_now-t_prev
@@ -30,10 +30,7 @@ while (1):
         gyro_x_current = gyro_x(wx,elapsed)
         gyro_y_current = gyro_y(wy,elapsed)
         gyro_z_current = gyro_z(gyro_z,elapsed)
-        gyro_pitch = gyro_pitch(gyro_x_prev,gyro_x_current,prev_time)
-        gyro_roll = gyro_roll(gyro_y_prev,gyro_x_current,prev_time)
     except:
         continue
-    
 
     print(gyro_z_current)
