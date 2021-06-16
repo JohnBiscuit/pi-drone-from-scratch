@@ -22,18 +22,15 @@ while (1):
         print("try")
     except:
         continue
-    try:
-        gyro_pitch = gyro_pitch(gyro_x_prev,gyro_x,t_prev)
-        gyro_roll = gyro_roll(gyro_y_prev,gyro_y,t_prev)
-        gyro_yaw = gyro_yaw(gyro_z_prev,gyro_z,t_prev)
 
-        pitch = (gyro_x*alpha)+(acc_pitch*(1-alpha))
-        roll = (gyro_y*alpha)+(acc_roll*(1-alpha))
-        gyro_x_prev = gyro_pitch
-        gyro_y_prev = gyro_roll
-        gyro_z_prev = gyro_yaw
-        t_prev =t_now
-        print(pitch)
-    except:
-        print("error")
-        continue
+    gyro_pitch = gyro_pitch(gyro_x_prev,gyro_x,t_prev)
+    gyro_roll = gyro_roll(gyro_y_prev,gyro_y,t_prev)
+    gyro_yaw = gyro_yaw(gyro_z_prev,gyro_z,t_prev)
+
+    pitch = (gyro_x*alpha)+(acc_pitch*(1-alpha))
+    roll = (gyro_y*alpha)+(acc_roll*(1-alpha))
+    gyro_x_prev = gyro_pitch
+    gyro_y_prev = gyro_roll
+    gyro_z_prev = gyro_yaw
+    t_prev =t_now
+    print(pitch)
