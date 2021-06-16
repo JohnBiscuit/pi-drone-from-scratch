@@ -18,6 +18,7 @@ data = [0,0]
 while (1):
     t_now = time.time()
     elapsed = t_now-t_prev
+    #complementary filter (the whole try section,why? just because)
     try:
         ax,ay,az,wx,wy,wz= mpu6050_conv()
         acc_x = ax        #get accelerometer reading of x axis
