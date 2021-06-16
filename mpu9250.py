@@ -122,8 +122,8 @@ def acc_z_displacement(previous_z_speed,current_z_speed,prev_time,current_time=t
 
 
 
-def gyro_pitch(previous_x,current_x,prev_time,current_time=time.time()): #getting gyro data
-    elapsed = current_time - prev_time
+def gyro_pitch(previous_x,current_x,elapsed): #getting gyro data
+    elapsed = elapsed
     dt = [0,elapsed]
     data = [previous_x,current_x]
     area = integrate.trapz(dt,data)
