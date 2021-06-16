@@ -12,6 +12,8 @@ while (1):
     t_now = time.time()
     elapsed = t_now-t_prev
     try:
+        t_now = time.time()
+        elapsed = t_now-t_prev
         acc_roll = acc_roll() #calculate instantaneous g-forces from accelerometer to get roll
         acc_pitch = acc_pitch()
         gyro_x = gyro_x(elapsed) #pitch
