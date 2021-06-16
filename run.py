@@ -11,8 +11,8 @@ gyro_z_prev = 0
 gyro_y_prev = 0
 
 time.sleep(1)
-dt = []
-data = []
+dt = [0,0]
+data = [0,0]
 while (1):
     t_now = time.time()
     elapsed = t_now-t_prev
@@ -31,8 +31,9 @@ while (1):
         gyro_x_current = gyro_x(wx,elapsed)
         gyro_y_current = gyro_y(wy,elapsed)
         gyro_z_current = gyro_z(gyro_z,elapsed)
-        dt = [0,elapsed]
-        data = [previous_y,current_y]
+        dt(1) = elapsed
+        data(0) = gyro_x_prev
+        data(1) = gyro_x_current 
         area = integrate.trapz(dt,data)
     except:
         continue
