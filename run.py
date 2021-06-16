@@ -57,7 +57,7 @@ while (1):
 
     except:
         continue
-    print(t_prev-time.time())
+    print(time.time-t_prev)
     t_prev = t_now
     gyro_x_prev = gyro_x_current
     gyro_y_prev = gyro_y_current
