@@ -1,7 +1,7 @@
 import smbus, time
 import math
 import scipy.integrate as integrate
-
+'''
 def acc_roll():
     acc_x = read_raw_bits(ACCEL_XOUT_H)         #get accelerometer reading of x axis
     acc_z = read_raw_bits(ACCEL_ZOUT_H)         #get accelerometer reading of x axis
@@ -30,7 +30,41 @@ def gyro_y(elapsed): #roll
 def gyro_z(elapsed): #yaw
     gyro_z = read_raw_bits(GYRO_ZOUT_H)
     w_z = (gyro_z / (2.0 ** 15.0)) * gyro_sens # in degree per second
-    return w_z
+    return w_z'''
+
+def values(elapsed):
+    ax,ay,az,wx,wy,wz= mpu6050_conv()
+    acc_x = ax        #get accelerometer reading of x axis
+    acc_z = az        #get accelerometer reading of x axis
+    a_z = (acc_z / (2.0 ** 15.0)) * accel_sens  #convert to G's of acceleration
+    a_x = (acc_x / (2.0 ** 15.0)) * accel_sens
+    acc_roll = math.degrees(math.atan(a_x/a_z))
+
+    acc_y = read_raw_bits(ACCEL_YOUT_H)
+    acc_z = read_raw_bits(ACCEL_ZOUT_H)
+    a_y = (acc_y / (2.0 ** 15.0)) * accel_sens
+    a_z = (acc_z / (2.0 ** 15.0)) * accel_sens
+    acc_pitch = math.degrees(math.atan(a_y/a_z))
+
+
+    return acc_roll,acc_pitch,wx,wy,wz
+
+def values(elapsed):
+    ax,ay,az,wx,wy,wz= mpu6050_conv()
+    acc_x = ax        #get accelerometer reading of x axis
+    acc_z = az        #get accelerometer reading of x axis
+    a_z = (acc_z / (2.0 ** 15.0)) * accel_sens  #convert to G's of acceleration
+    a_x = (acc_x / (2.0 ** 15.0)) * accel_sens
+    acc_roll = math.degrees(math.atan(a_x/a_z))
+
+    acc_y = read_raw_bits(ACCEL_YOUT_H)
+    acc_z = read_raw_bits(ACCEL_ZOUT_H)
+    a_y = (acc_y / (2.0 ** 15.0)) * accel_sens
+    a_z = (acc_z / (2.0 ** 15.0)) * accel_sens
+    acc_pitch = math.degrees(math.atan(a_y/a_z))
+
+
+    return acc_roll,acc_pitch,wx,wy,wz
 
 def gyro_yaw(previous_z,current_z,prev_time,current_time=time.time()): #getting gyro data
     elapsed = current_time - prev_time
