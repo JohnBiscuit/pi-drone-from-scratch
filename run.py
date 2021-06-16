@@ -35,7 +35,7 @@ while (1):
         gyro_x_current = gyro_x(wx,elapsed)
         gyro_y_current = gyro_y(wy,elapsed)
         gyro_z_current = gyro_z(gyro_z,elapsed)
-        alpha = elapsed = (0.05/(0.05+elapsed))
+        alpha = elapsed = (1/(1+elapsed))
         #gyro pitch
         dt[1] = elapsed
         data[0] = gyro_x_prev
