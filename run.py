@@ -36,4 +36,4 @@ while (1):
     except:
         continue
 
-    print(gyro_yaw)
+    print(gyro_x_current)
