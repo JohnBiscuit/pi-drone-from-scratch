@@ -1,7 +1,7 @@
 import smbus, time
 import math
 import scipy.integrate as integrate
-'''
+
 def acc_roll():
     acc_x = read_raw_bits(ACCEL_XOUT_H)         #get accelerometer reading of x axis
     acc_z = read_raw_bits(ACCEL_ZOUT_H)         #get accelerometer reading of x axis
@@ -30,7 +30,7 @@ def gyro_y(elapsed): #roll
 def gyro_z(elapsed): #yaw
     gyro_z = read_raw_bits(GYRO_ZOUT_H)
     w_z = (gyro_z / (2.0 ** 15.0)) * gyro_sens # in degree per second
-    return w_z'''
+    return w_z
 
 def values(elapsed):
     ax,ay,az,wx,wy,wz= mpu6050_conv()
