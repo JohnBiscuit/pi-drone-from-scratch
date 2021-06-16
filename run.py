@@ -30,10 +30,7 @@ while (1):
         gyro_x_current = gyro_x(wx,elapsed)
         gyro_y_current = gyro_y(wy,elapsed)
         gyro_z_current = gyro_z(gyro_z,elapsed)
-        elapsed = elapsed
-        dt = [0,elapsed]
-        data = [gyro_x_,gyro_x_current]
-        area = integrate.trapz(dt,data)
+        
     except:
         continue
     t_prev = t_now
