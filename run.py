@@ -9,7 +9,9 @@ t_prev = time.time()
 gyro_x_prev = 0
 gyro_z_prev = 0
 gyro_y_prev = 0
-pitch = 0
+gyro_pitch = 0
+gyro_roll = 0
+gyro_yaw = 0
 time.sleep(1)
 dt = [0,0]
 data = [0,0]
@@ -31,14 +33,29 @@ while (1):
         gyro_x_current = gyro_x(wx,elapsed)
         gyro_y_current = gyro_y(wy,elapsed)
         gyro_z_current = gyro_z(gyro_z,elapsed)
+        #gyro pitch
         dt[1] = elapsed
         data[0] = gyro_x_prev
         data[1] = gyro_x_current
         area = integrate.trapz(dt,data)
-        pitch = pitch +area
+        gyro_pitch = gyro_pitch +area
+        #gyro roll
+        dt[1] = elapsed
+        data[0] = gyro_y_prev
+        data[1] = gyro_y_current
+        area = integrate.trapz(dt,data)
+        gyro_roll = gyro_roll +area
+        #gyro yaw
+        dt[1] = elapsed
+        data[0] = gyro_y_prev
+        data[1] = gyro_y_current
+        area = integrate.trapz(dt,data)
+        gyro_yaw = gyro_yaw +area
+
     except:
         continue
     t_prev = t_now
     gyro_x_prev = gyro_x_current
-
+    gyro_y_prev = gyro_y_current
+    gyro_z_prev = gyro_z_current
     print(pitch)
