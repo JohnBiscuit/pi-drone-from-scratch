@@ -17,6 +17,7 @@ dt = [0,0]
 data = [0,0]
 while (1):
     elapsed = time.time()-t_prev
+    t_now = time.time()
     t = elapsed
     #complementary filter (the whole try section,why? just because)
     try:
@@ -58,7 +59,7 @@ while (1):
     except:
         continue
     print(t)
-    t_prev = t_now
+    t_prev = time.time()
     gyro_x_prev = gyro_x_current
     gyro_y_prev = gyro_y_current
     gyro_z_prev = gyro_z_current
