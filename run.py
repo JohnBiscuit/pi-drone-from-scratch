@@ -30,8 +30,10 @@ while (1):
         gyro_x_current = gyro_x(wx,elapsed)
         gyro_y_current = gyro_y(wy,elapsed)
         gyro_z_current = gyro_z(gyro_z,elapsed)
-        gyro_pitch(gyro_x_prev,gyro_x_current,elapsed)
+        gyro_pitch = gyro_pitch(gyro_x_prev,gyro_x_current,elapsed)
+        gyro_roll = gyro_roll(gyro_y_prev,gyro_y_current,elapsed)
+        gyro_yaw = gyro_yaw(gyro_z_prev,gyro_z_current,elapsed)
     except:
         continue
 
-    print(gyro_z_current)
+    print(gyro_yaw)

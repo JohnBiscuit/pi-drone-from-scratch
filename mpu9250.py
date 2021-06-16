@@ -129,15 +129,15 @@ def gyro_pitch(previous_x,current_x,elapsed): #getting gyro data
     area = integrate.trapz(dt,data)
     return area
 
-def gyro_roll(previous_y,current_y,prev_time,current_time=time.time()): #getting gyro data
-    elapsed = current_time - prev_time
+def gyro_roll(previous_y,current_y,elapsed): #getting gyro data
+    elapsed = elapsed
     dt = [0,elapsed]
     data = [previous_y,current_y]
     area = integrate.trapz(dt,data)
     return area
 
-def gyro_yaw(previous_z,current_z,prev_time,current_time=time.time()): #getting gyro data
-    elapsed = current_time - prev_time
+def gyro_yaw(previous_z,current_z,elapsed): #getting gyro data
+    elapsed = elapsed
     dt = [0,elapsed]
     data = [previous_z,current_z]
     area = integrate.trapz(dt,data)
