@@ -52,7 +52,7 @@ while (1):
         data[1] = gyro_y_current
         area = integrate.trapz(dt,data)
         gyro_yaw = gyro_yaw +area
-        roll_angle = (gyro_roll*alpha)+(acc_roll*(1-alpha))
+        roll_angle = (gyro_roll*0.96)+(acc_roll*(0.04))
 
     except:
         continue
