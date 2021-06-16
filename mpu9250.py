@@ -95,17 +95,17 @@ def gyro_pitch(previous_x,current_x,prev_time,current_time=time.time()): #gettin
     area = integrate.trapz(dt,data)
     return area
 
-def gyro_roll(previous_x,current_x,prev_time,current_time=time.time()): #getting gyro data
+def gyro_roll(previous_y,current_y,prev_time,current_time=time.time()): #getting gyro data
     elapsed = current_time - prev_time
     dt = [0,elapsed]
-    data = [previous_x,current_x]
+    data = [previous_y,current_y]
     area = integrate.trapz(dt,data)
     return area
 
 def gyro_yaw(previous_z,current_z,prev_time,current_time=time.time()): #getting gyro data
     elapsed = current_time - prev_time
     dt = [0,elapsed]
-    data = [previous_y,current_y]
+    data = [previous_z,current_z]
     area = integrate.trapz(dt,data)
     return area
 

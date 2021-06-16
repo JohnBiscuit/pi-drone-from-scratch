@@ -29,4 +29,5 @@ while (1):
     gyro_x_prev = gyro_pitch
     gyro_y_prev = gyro_roll
     gyro_z_prev = gyro_yaw
+    t_prev =t_now
     print(pitch)
