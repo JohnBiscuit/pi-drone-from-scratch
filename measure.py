@@ -1,6 +1,8 @@
 from mpu9250 import *
 import scipy.integrate as integrate
 import matplotlib.pyplot as plt
+import time
+import smbus
 
 alpha = 0.98
 t_prev = time.time()
@@ -26,5 +28,5 @@ while (1):
         a_z = (acc_z / (2.0 ** 15.0)) * accel_sens
         acc_pitch = math.degrees(math.atan(a_y/a_z))
     except:
-            continue
+        continue
     print(acc_roll)

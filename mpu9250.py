@@ -19,15 +19,15 @@ def acc_pitch():
     return pitch
 
 
-def gyro_x(elapsed): #pitch
+def gyro_x(gyro_x,elapsed): #pitch
     gyro_x = read_raw_bits(GYRO_XOUT_H)
     w_x = (gyro_x / (2.0 ** 15.0)) * gyro_sens
     return w_x
-def gyro_y(elapsed): #roll
+def gyro_y(gyro_y,elapsed): #roll
     gyro_y = read_raw_bits(GYRO_YOUT_H)
     w_y = (gyro_y / (2.0 ** 15.0)) * gyro_sens
     return w_y
-def gyro_z(elapsed): #yaw
+def gyro_z(gyro_z,elapsed): #yaw
     gyro_z = read_raw_bits(GYRO_ZOUT_H)
     w_z = (gyro_z / (2.0 ** 15.0)) * gyro_sens # in degree per second
     return w_z
