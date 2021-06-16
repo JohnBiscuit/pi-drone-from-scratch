@@ -32,4 +32,4 @@ while (1):
         gyro_z_current = gyro_z(gyro_z,elapsed)
     except:
         continue
-    print(acc_roll)
+    print(gyro_z_current)
