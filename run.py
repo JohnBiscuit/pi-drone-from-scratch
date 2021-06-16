@@ -19,3 +19,4 @@ while (1):
         acc_roll,acc_pitch,wx,wy,wz = value(elapsed)
     except:
         continue
+    print(acc_roll)
