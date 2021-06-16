@@ -33,6 +33,7 @@ while (1):
         gyro_x_current = gyro_x(wx,elapsed)
         gyro_y_current = gyro_y(wy,elapsed)
         gyro_z_current = gyro_z(gyro_z,elapsed)
+        alpha = elapsed = (1/(1+elapsed))
         #gyro pitch
         dt[1] = elapsed
         data[0] = gyro_x_prev
@@ -44,14 +45,14 @@ while (1):
         data[0] = gyro_y_prev
         data[1] = gyro_y_current
         area = integrate.trapz(dt,data)
-        gyro_roll = gyro_roll +area
+        gyro_roll = roll_angle +area
         #gyro yaw
         dt[1] = elapsed
         data[0] = gyro_y_prev
         data[1] = gyro_y_current
         area = integrate.trapz(dt,data)
         gyro_yaw = gyro_yaw +area
-        roll_angle = (gyro_roll*0.998)+(acc_roll*(0.002))
+        roll_angle = (gyro_roll*alpha)+(acc_roll*(1-alpha))
 
     except:
         continue
