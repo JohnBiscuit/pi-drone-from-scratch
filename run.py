@@ -1,6 +1,6 @@
 from mpu9250 import *
 import scipy.integrate as integrate
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import time
 
 alpha = 0.98
