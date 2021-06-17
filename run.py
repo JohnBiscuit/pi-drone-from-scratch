@@ -31,7 +31,7 @@ while (1):
         acc_z = read_raw_bits(ACCEL_ZOUT_H)
         a_y = (acc_y / (2.0 ** 15.0)) * accel_sens
         a_z = (acc_z / (2.0 ** 15.0)) * accel_sens
-            acc_pitch = math.degrees(math.atan(a_y/a_z))
+        acc_pitch = math.degrees(math.atan(a_y/a_z))
         gyro_x_current = gyro_x(wx,elapsed)
         gyro_y_current = gyro_y(wy,elapsed)
         gyro_z_current = gyro_z(wz,elapsed)
@@ -67,4 +67,4 @@ while (1):
     gyro_z_prev = gyro_z_current
     #print(acc_roll)
     #print("roll:",gyro_roll.round(2),"pitch:",gyro_pitch.round(2),"yaw:",gyro_yaw.round(0),"roll angle:",roll_angle.round(2))
-    print("roll:",roll,"pitch:",pitch)
+    print("roll:",roll.round(2),"pitch:",pitch.round(2))
