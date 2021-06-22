@@ -47,8 +47,8 @@ while (1):
         dt[1] = elapsed
         data[0] = gyro_y_prev
         data[1] = gyro_y_current
-        area = integrate.trapz(dt,data)
-        gyro_roll = roll_angle + area
+        delta_roll = integrate.trapz(dt,data)
+        gyro_roll = roll_angle + delta_roll
         #gyro yaw
         dt[1] = elapsed
         data[0] = gyro_z_prev
@@ -56,7 +56,7 @@ while (1):
         area = integrate.trapz(dt,data)
         gyro_yaw = gyro_yaw +area
         acc_roll_ratio = acc_roll*(1-alpha)
-        roll_angle = (gyro_roll*alpha)+(acc_roll_ratio)
+        roll_angle = delta_roll+(roll)+(acc_roll_ratio)
         pitch_angle = (gyro_pitch*alpha)+(acc_pitch*(1-alpha))
         roll = roll_angle
         pitch = pitch_angle
@@ -71,4 +71,3 @@ while (1):
     #print(acc_roll)
     print("roll:",gyro_roll.round(2),"pitch:",gyro_pitch.round(2),"yaw:",gyro_yaw.round(0),"roll angle:",roll_angle.round(2))
     #print("roll:",roll.round(2),"pitch:",pitch.round(2))
-
