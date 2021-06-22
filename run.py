@@ -4,8 +4,11 @@ import scipy.integrate as integrate
 import time
 import smbus
 roll_angle = 0
-alpha = 0.02
+pitch_angle = 0
+alpha = 0.99
 t_prev = time.time()
+delta_roll = 0
+delta_pitch = 0
 gyro_x_prev = 0
 gyro_z_prev = 0
 gyro_y_prev = 0
@@ -41,21 +44,24 @@ while (1):
         data[0] = gyro_x_prev
         data[1] = gyro_x_current
         area = integrate.trapz(dt,data)
+        delta_pitch = area
         gyro_pitch = gyro_pitch +area
         #gyro roll
         dt[1] = elapsed
         data[0] = gyro_y_prev
         data[1] = gyro_y_current
         area = integrate.trapz(dt,data)
-        gyro_roll = roll_angle + area
+        delta_roll = area
+        #gyro_roll = roll_angle + area
+        
         #gyro yaw
         dt[1] = elapsed
         data[0] = gyro_z_prev
         data[1] = gyro_z_current
         area = integrate.trapz(dt,data)
         gyro_yaw = gyro_yaw +area
-        roll_angle = (gyro_roll*alpha)+(acc_roll*(1-alpha))
-        pitch_angle = (gyro_pitch*alpha)+(acc_pitch*(1-alpha))
+        roll_angle = ((delta_roll + roll_angle)*alpha)+(acc_roll*(1-alpha))
+        pitch_angle = ((delta_pitch + pitch_angle)*alpha)+(acc_pitch*(1-alpha))
         roll = roll_angle
         pitch = pitch_angle
     except:
@@ -68,3 +74,4 @@ while (1):
     #print(acc_roll)
     #print("roll:",gyro_roll.round(2),"pitch:",gyro_pitch.round(2),"yaw:",gyro_yaw.round(0),"roll angle:",roll_angle.round(2))
     print("roll:",roll.round(2),"pitch:",pitch.round(2))
+    
