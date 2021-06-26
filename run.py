@@ -3,8 +3,8 @@ import scipy.integrate as integrate
 #import matplotlib.pyplot as plt
 import time
 import smbus
-roll_angle = 0
-pitch_angle = 0
+roll = 0
+pitch =0
 alpha = 0.99
 t_prev = time.time()
 delta_roll = 0
@@ -24,46 +24,34 @@ while (1):
     t = elapsed
     #complementary filter (the whole try section,why? just because)
     try:
-        ax,ay,az,wx,wy,wz= mpu6050_conv()
-        acc_x = ax        #get accelerometer reading of x axis
-        acc_z = az        #get accelerometer reading of x axis
-        a_z = (acc_z / (2.0 ** 15.0)) * accel_sens  #convert to G's of acceleration
-        a_x = (acc_x / (2.0 ** 15.0)) * accel_sens
-        acc_roll = math.degrees(math.atan(a_x/a_z))
-        acc_y = read_raw_bits(ACCEL_YOUT_H)
-        acc_z = read_raw_bits(ACCEL_ZOUT_H)
-        a_y = (acc_y / (2.0 ** 15.0)) * accel_sens
-        a_z = (acc_z / (2.0 ** 15.0)) * accel_sens
-        acc_pitch = math.degrees(math.atan(a_y/a_z))
+        acc_x,acc_y,acc_z,wx,wy,wz= mpu6050_conv() #get accelerometer reading
+
+        acc_roll = math.degrees(math.atan(acc_x/acc_z))  #calculate roll and pitch using trigonometry
+        acc_pitch = math.degrees(math.atan(acc_y/acc_z))
+        
+        
         gyro_x_current = gyro_x(wx,elapsed)
         gyro_y_current = gyro_y(wy,elapsed)
         gyro_z_current = gyro_z(wz,elapsed)
-        #alpha = elapsed = (1/(1+elapsed))
+        alpha = elapsed = (0.1/(0.1+elapsed))
         #gyro pitch
         dt[1] = elapsed
-        data[0] = gyro_x_prev
-        data[1] = gyro_x_current
-        area = integrate.trapz(dt,data)
-        delta_pitch = area
-        gyro_pitch = gyro_pitch +area
+        data = [gyro_x_prev,gyro_x_current]
+        delta_pitch = integrate.trapz(dt,data)
+        gyro_pitch = gyro_pitch +delta_pitch
         #gyro roll
-        dt[1] = elapsed
-        data[0] = gyro_y_prev
-        data[1] = gyro_y_current
-        area = integrate.trapz(dt,data)
-        delta_roll = area
+        data = [gyro_y_prev,gyro_y_current]
+        delta_roll = integrate.trapz(dt,data)
+        
         #gyro_roll = roll_angle + area
         
         #gyro yaw
-        dt[1] = elapsed
-        data[0] = gyro_z_prev
-        data[1] = gyro_z_current
+        data = [gyro_z_prev,gyro_z_current]
         area = integrate.trapz(dt,data)
         gyro_yaw = gyro_yaw +area
-        roll_angle = ((delta_roll + roll_angle)*alpha)+(acc_roll*(1-alpha))
-        pitch_angle = ((delta_pitch + pitch_angle)*alpha)+(acc_pitch*(1-alpha))
-        roll = roll_angle
-        pitch = pitch_angle
+        roll = ((delta_roll + roll)*alpha)+(acc_roll*(1-alpha))
+        pitch = ((delta_pitch + pitch)*alpha)+(acc_pitch*(1-alpha))
+        
     except:
         continue
     #print(t)
