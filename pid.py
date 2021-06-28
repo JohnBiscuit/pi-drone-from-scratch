@@ -3,14 +3,21 @@ import scipy.integrate as integrate
 #import matplotlib.pyplot as plt
 import time
 import smbus
-kp = 2
-ki = 0.01
-kd = 1
+#roll variable
+kp = 10
+ki = 0.02
+kd = 5
 pid_p = 0
 pid_i = 0
 pid_d = 0
 target_angle = -6.1 #only for testing
 previous_roll_error = 0
+
+pitch_pid_p = 0
+pitch_pid_i = 0
+pitch_pid_d = 0
+previous_pitch_error = 0
+
 
 roll = 0
 pitch =0
@@ -69,14 +76,22 @@ while (1):
     gyro_y_prev = gyro_y_current
     gyro_z_prev = gyro_z_current
     
+    #roll pid
     roll_error = roll - target_angle
     pid_p = kp*roll_error
     pid_i = pid_i + (ki*roll_error)
     pid_d = kd*((roll_error - previous_roll_error)/elapsed)
     pid_roll = pid_p + pid_i + pid_d
     previous_roll_error = roll_error
+    #pitch_pid
+    pitch_error = pitch - target_angle
+    pitch_pid_p = kp*pitch_error
+    pitch_pid_i = pid_i + (ki*roll_error)
+    pitch_pid_d = kd*((roll_error - previous_roll_error)/elapsed)
+    pitch_pid = pitch_pid_p + pitch_pid_i + pitch_pid_d
+    previous_pitch_error = pitch_error
     
     #print(acc_roll)
     #print("roll:",gyro_roll.round(2),"pitch:",gyro_pitch.round(2),"yaw:",gyro_yaw.round(0),"roll angle:",roll_angle.round(2))
     #print("roll:",roll.round(2),"pitch:",pitch.round(2))
-    print("roll:",roll.round(2),"pid_roll:",pid_roll)
+    print("roll:",roll.round(2),"pid_roll:",pid_roll.round(2),"pitch:",pitch.round(2),"pid_pitch:",pitch_pid.round(2))
